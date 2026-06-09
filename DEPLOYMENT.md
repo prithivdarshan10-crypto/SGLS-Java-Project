@@ -6,7 +6,7 @@
 
 ### Step 1 — Configure Git (one-time setup)
 ```bash
-git config --global user.name "Priya Darshan S V"
+git config --global user.name "Priyadarshan S V"
 git config --global user.email "prithivdarshan10@gmail.com"
 ```
 

@@ -202,6 +202,6 @@ src/main/java/com/sgls/
 
 ## Author
 
-**Priya Darshan S V**
+**Priyadarshan S V**
 B.Tech AIML — SRM IST Tiruchirappalli
 [GitHub](https://github.com/prithivdarshan10-crypto) | [LinkedIn](https://linkedin.com/in/darshan-7039bb352)

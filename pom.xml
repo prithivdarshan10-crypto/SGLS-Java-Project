@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+        PARENT: Spring Boot 3.2.x provides dependency management for all
+        Spring libraries. We inherit versions so we don't have to specify
+        them manually — this is the "opinionated" starter approach.
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/>
+    </parent>
+
+    <!-- Project identity — used as the JAR name on Render -->
+    <groupId>com.sgls</groupId>
+    <artifactId>smart-global-logistics</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <name>Smart Global Logistics System</name>
+    <description>Enterprise Logistics and Warehouse Management Platform</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <!-- JWT library version pinned here for single-place update -->
+        <jjwt.version>0.11.5</jjwt.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- ============================================================
+             CORE WEB — Spring MVC + embedded Tomcat server.
+             Every REST controller depends on this.
+             ============================================================ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- ============================================================
+             DATA JPA — Hibernate ORM + Spring Data repositories.
+             Gives us @Entity, @Repository, JpaRepository<T,ID>.
+             Handles SQL generation, connection pooling (HikariCP).
+             ============================================================ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- ============================================================
+             SECURITY — Spring Security filters, authentication manager,
+             UserDetailsService, BCryptPasswordEncoder.
+             We build JWT on top of this foundation.
+             ============================================================ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- ============================================================
+             VALIDATION — @NotNull, @Email, @Size etc on DTOs.
+             Uses Hibernate Validator (JSR 380) under the hood.
+             ============================================================ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- ============================================================
+             THYMELEAF — Server-side template engine for HTML views.
+             The frontend Bootstrap pages are rendered by Thymeleaf.
+             thymeleaf-extras-springsecurity6 enables sec:authorize tags.
+             ============================================================ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
+
+        <!-- ============================================================
+             MYSQL CONNECTOR — JDBC driver to talk to MySQL 8.
+             Scope=runtime because we don't import MySQL classes directly;
+             Spring Boot and HikariCP use it through the JDBC API.
+             ============================================================ -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- ============================================================
+             JWT — JSON Web Token library (JJWT).
+             Three JARs work together:
+               api    = interfaces and builder API we call in our code
+               impl   = runtime implementation (not needed at compile time)
+               jackson= serialize/deserialize JWT claims as JSON
+             ============================================================ -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- ============================================================
+             LOMBOK — Eliminates boilerplate: @Getter, @Setter,
+             @NoArgsConstructor, @Builder, @Slf4j etc.
+             Lombok is a compile-time annotation processor — not included
+             in the final JAR; hence optional=true.
+             ============================================================ -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- ============================================================
+             DEVTOOLS — Hot-reload in development. Automatically excluded
+             from production builds by Spring Boot plugin.
+             ============================================================ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- ============================================================
+             TEST — JUnit 5 + Mockito + Spring Test utilities.
+             ============================================================ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+                Spring Boot Maven Plugin — packages the app as an
+                executable "fat JAR" containing all dependencies.
+                This is what Render runs: java -jar app.jar
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- Exclude Lombok from the final JAR — it's only needed at compile time -->
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -135,13 +135,15 @@ public class WebSecurityConfig {
 
                 // PUBLIC endpoints — no authentication required
                 .requestMatchers(
-                    "/api/auth/**",    // Login, register
-                    "/",               // Landing page
-                    "/login",          // Login form
-                    "/css/**",         // Static CSS
-                    "/js/**",          // Static JS
-                    "/images/**",      // Static images
-                    "/error"           // Error page
+                   "/api/auth/**",
+                   "/",
+                   "/login",
+                   "/register",
+                   "/dashboard",
+                   "/css/**",
+                   "/js/**",
+                   "/images/**",
+                   "/error"
                 ).permitAll()
 
                 // ADMIN-ONLY endpoints

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" 
+xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -297,27 +298,35 @@ Mission Control Dashboard
 <div class="cards">
 
 <div class="card">
-<h3>Total Shipments</h3>
-<div class="number">120</div>
+<h3>Total Users</h3>
+<div class="number" th:text="${totalUsers}">
+0
+</div>
 </div>
 
 <div class="card">
-<h3>Vehicles Active</h3>
-<div class="number">50</div>
+<h3>Admins</h3>
+<div class="number" th:text="${admins}">
+0
+</div>
+</div>
+
+<div class="card">
+<h3>Managers</h3>
+<div class="number" th:text="${managers}">
+0
+</div>
 </div>
 
 <div class="card">
 <h3>Employees</h3>
-<div class="number">35</div>
+<div class="number" th:text="${employees}">
+0
 </div>
-
-<div class="card">
-<h3>Warehouses</h3>
-<div class="number">12</div>
 </div>
 
 </div>
-
+  
 <div class="analytics">
 
 <div class="chart">

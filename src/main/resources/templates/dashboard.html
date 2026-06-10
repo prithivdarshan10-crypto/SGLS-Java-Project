@@ -332,21 +332,21 @@ gap:20px;
 
 <p>
 <b>Username:</b>
-<span id="profileUser"></span>
+<span th:text="${#authentication.name}">
+User
+</span>
 </p>
 
 <br>
 
 <p>
-<b>Role:</b>
-<span id="profileRole"></span>
+<b>Status:</b> Active
 </p>
 
 <br>
 
 <p>
-<b>Status:</b>
-Active
+<b>System:</b> SGLS Command Center
 </p>
 
 </div>

@@ -332,7 +332,14 @@ gap:20px;
 
 <p>
 <b>Username:</b>
-<span id="profileUser"></span>
+<span id="profileUser">Loading...</span>
+</p>
+
+<br>
+
+<p>
+<b>Role:</b>
+<span id="profileRole">EMPLOYEE</span>
 </p>
 
 <br>
@@ -348,7 +355,6 @@ gap:20px;
 </p>
 
 </div>
-
 </div>
 
 <div class="toast" id="toast">
@@ -362,11 +368,19 @@ const role = localStorage.getItem("role");
 
 if(username){
 
+document.getElementById("welcomeUser").innerHTML =
+"🚀 Welcome Commander " + username + " | " + role;
+
+document.getElementById("profileUser").innerText =
+username;
+
+document.getElementById("profileRole").innerText =
+role;
+
 document.getElementById("toast").innerHTML =
-"🚀 Welcome Back Commander " + username + " 
+"🚀 Welcome Back Commander " + username;
 
 }
-
 function logout(){
 
 localStorage.clear();
@@ -375,17 +389,16 @@ window.location.href="/login";
 
 }
 
-setTimeout(()=>{
+setTimeout(() => {
 
-document.getElementById("toast").style.display="none";
+document.getElementById("toast").style.display = "none";
 
-},4000);
+}, 4000);
 
 new Chart(
 document.getElementById("shipmentChart"),
 {
 type:'line',
-
 data:{
 labels:[
 'Jan',
@@ -395,7 +408,6 @@ labels:[
 'May',
 'Jun'
 ],
-
 datasets:[{
 label:'Shipments',
 data:[

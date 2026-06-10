@@ -1,3 +1,4 @@
+import java.util.List;
 package com.sgls.controller;
 
 import com.sgls.entity.User;
@@ -31,7 +32,15 @@ public class DashboardController {
         model.addAttribute("admins", admins);
         model.addAttribute("managers", managers);
         model.addAttribute("employees", employees);
+        List<User> recentUsers =
+        userRepository.findAll()
+                .stream()
+                .sorted((a,b) ->
+        b.getCreatedAt().compareTo(a.getCreatedAt()))
+                .limit(5)
+                .toList();
 
+        model.addAttribute("recentUsers", recentUsers);
         return "dashboard";
     }
 }

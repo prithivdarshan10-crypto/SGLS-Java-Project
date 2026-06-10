@@ -309,13 +309,15 @@ gap:20px;
 <h2>⚡ Recent Activity</h2>
 
 <ul>
-<li>Shipment #SG1024 delivered successfully</li>
-<li>Warehouse inventory updated</li>
-<li>New employee registered</li>
-<li>Route optimization completed</li>
-<li>Analytics report generated</li>
-<li>Cloud deployment verified</li>
-<li>Security audit passed</li>
+
+<li th:each="user : ${recentUsers}">
+👤 New User Registered :
+<b th:text="${user.username}"></b>
+(
+<span th:text="${user.role}"></span>
+)
+</li>
+
 </ul>
 
 </div>

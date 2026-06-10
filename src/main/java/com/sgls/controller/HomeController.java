@@ -25,4 +25,29 @@ public class HomeController {
     public String dashboard() {
         return "dashboard";
     }
+
+    @GetMapping("/shipments")
+    public String shipments() {
+        return "shipments";
+    }
+
+    @GetMapping("/inventory")
+    public String inventory() {
+        return "inventory";
+    }
+
+    @GetMapping("/warehouses")
+    public String warehouses() {
+        return "warehouses";
+    }
+
+    @GetMapping("/employees")
+    public String employees() {
+        return "employees";
+    }
+
+    @GetMapping("/analytics")
+    public String analytics() {
+        return "analytics";
+    }
 }

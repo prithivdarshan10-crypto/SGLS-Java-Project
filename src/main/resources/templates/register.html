@@ -1,61 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register</title>
+<title>SGLS Register</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
 body{
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
-background:#0b1026;
-font-family:Arial;
+background:#050816;
+overflow:hidden;
 }
 
-.card{
-background:white;
+body::before{
+content:'';
+position:absolute;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle,#2563eb22 1px,transparent 1px);
+background-size:50px 50px;
+animation:stars 30s linear infinite;
+z-index:-1;
+}
+
+@keyframes stars{
+from{transform:translateY(0);}
+to{transform:translateY(-500px);}
+}
+
+.register-card{
+width:450px;
 padding:40px;
-border-radius:15px;
-width:350px;
+border-radius:20px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.1);
+box-shadow:0 0 40px rgba(37,99,235,0.3);
+color:white;
 }
 
-input{
+.logo{
+text-align:center;
+font-size:32px;
+font-weight:700;
+color:#60a5fa;
+margin-bottom:15px;
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#cbd5e1;
+margin-bottom:30px;
+}
+
+.input-group{
+margin-bottom:18px;
+}
+
+.input-group input{
 width:100%;
-padding:10px;
-margin:10px 0;
+padding:15px;
+border:none;
+outline:none;
+border-radius:10px;
+background:rgba(255,255,255,0.1);
+color:white;
+font-size:15px;
+}
+
+.input-group input::placeholder{
+color:#cbd5e1;
 }
 
 button{
 width:100%;
-padding:12px;
+padding:15px;
+border:none;
+border-radius:10px;
 background:#2563eb;
 color:white;
-border:none;
+font-size:16px;
+font-weight:600;
 cursor:pointer;
+transition:.3s;
 }
-</style>
 
+button:hover{
+transform:translateY(-3px);
+box-shadow:0 0 20px rgba(37,99,235,0.6);
+}
+
+.login-link{
+text-align:center;
+margin-top:20px;
+}
+
+.login-link a{
+color:#60a5fa;
+text-decoration:none;
+}
+
+</style>
 </head>
+
 <body>
 
-<div class="card">
+<div class="register-card">
 
-<h2>Register</h2>
+<div class="logo">SGLS</div>
+
+<h1>Create Account</h1>
+
+<p class="subtitle">
+Join Smart Global Logistics System
+</p>
 
 <form>
 
+<div class="input-group">
+<input type="text" placeholder="Full Name">
+</div>
+
+<div class="input-group">
 <input type="text" placeholder="Username">
+</div>
 
-<input type="email" placeholder="Email">
+<div class="input-group">
+<input type="email" placeholder="Email Address">
+</div>
 
+<div class="input-group">
 <input type="password" placeholder="Password">
+</div>
 
-<button type="submit">Register</button>
+<div class="input-group">
+<input type="password" placeholder="Confirm Password">
+</div>
+
+<button type="submit">Create Account</button>
 
 </form>
+
+<div class="login-link">
+Already have an account?
+<a href="/login">Login</a>
+</div>
 
 </div>
 

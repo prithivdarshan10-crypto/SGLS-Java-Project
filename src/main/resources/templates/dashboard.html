@@ -354,7 +354,7 @@ User
 </div>
 
 <div class="toast" id="toast">
-🚀 Welcome to SGLS Command Center
+🚀 Login Successful
 </div>
 
 <script>
@@ -364,11 +364,8 @@ const role = localStorage.getItem("role");
 
 if(username){
 
-document.getElementById("welcomeUser").innerHTML =
-"🚀 Welcome Commander " +
-username +
-" | " +
-role;
+document.getElementById("toast").innerHTML =
+"🚀 Welcome Back Commander " + username + " 
 
 }
 
@@ -419,6 +416,20 @@ fill:false
 );
 
 </script>
+<footer style="
+text-align:center;
+padding:25px;
+margin-top:40px;
+color:#94a3b8;
+border-top:1px solid rgba(255,255,255,0.1);
+">
 
+© 2026 Smart Global Logistics System (SGLS)
+
+<br><br>
+
+🚀 Powered by Spring Boot • MySQL • JWT • Render Cloud
+
+</footer>
 </body>
 </html>

@@ -1,6 +1,5 @@
-import java.util.List;
 package com.sgls.controller;
-
+import java.util.List;
 import com.sgls.entity.User;
 import com.sgls.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

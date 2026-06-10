@@ -362,12 +362,6 @@ User
 const username = localStorage.getItem("username");
 const role = localStorage.getItem("role");
 
-document.getElementById("profileUser").innerText =
-username || "Unknown";
-
-document.getElementById("profileRole").innerText =
-role || "EMPLOYEE";
-
 if(username){
 
 document.getElementById("welcomeUser").innerHTML =

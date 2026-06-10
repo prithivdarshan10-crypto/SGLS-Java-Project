@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" 
-xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SGLS Command Center</title>
+
+<title>SGLS Mission Control</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
@@ -21,18 +25,18 @@ font-family:'Poppins',sans-serif;
 --primary:#60a5fa;
 --secondary:#2563eb;
 --dark:#050816;
---glass:rgba(255,255,255,0.06);
---border:rgba(255,255,255,0.1);
+--glass:rgba(255,255,255,.06);
+--border:rgba(255,255,255,.10);
 }
 
 body{
-background:var(--dark);
+background:#050816;
 color:white;
 overflow-x:hidden;
 min-height:100vh;
 }
 
-/* NASA STARFIELD */
+/* NASA Background */
 
 body::before{
 content:'';
@@ -57,21 +61,17 @@ width:200%;
 height:200%;
 background:
 radial-gradient(circle at center,
-rgba(37,99,235,.18),
+rgba(37,99,235,.15),
 transparent 60%);
 z-index:-3;
 }
 
 @keyframes stars{
-from{
-transform:translateY(0);
-}
-to{
-transform:translateY(-800px);
-}
+from{transform:translateY(0);}
+to{transform:translateY(-800px);}
 }
 
-/* SIDEBAR */
+/* Sidebar */
 
 .sidebar{
 position:fixed;
@@ -79,46 +79,42 @@ left:0;
 top:0;
 width:260px;
 height:100%;
+padding:25px;
 background:var(--glass);
 backdrop-filter:blur(18px);
 border-right:1px solid var(--border);
-padding:25px;
 }
 
 .logo{
 font-size:34px;
 font-weight:700;
-color:var(--primary);
 text-align:center;
+color:var(--primary);
 margin-bottom:40px;
 text-shadow:0 0 25px rgba(96,165,250,.8);
 }
 
 .menu a{
 display:block;
-text-decoration:none;
-color:white;
 padding:15px;
 margin-bottom:10px;
 border-radius:12px;
-transition:.35s;
-font-weight:500;
+text-decoration:none;
+color:white;
+transition:.3s;
 }
 
 .menu a:hover{
 background:var(--secondary);
 transform:translateX(8px);
-box-shadow:0 0 20px rgba(37,99,235,.5);
 }
 
-/* MAIN */
+/* Main */
 
 .main{
 margin-left:280px;
 padding:30px;
 }
-
-/* HEADER */
 
 .header{
 display:flex;
@@ -128,23 +124,22 @@ margin-bottom:35px;
 }
 
 #welcomeUser{
-font-size:34px;
+font-size:32px;
 font-weight:700;
 }
 
 .status{
-padding:12px 22px;
 background:#10b981;
+padding:10px 20px;
 border-radius:30px;
 font-weight:600;
-box-shadow:0 0 20px rgba(16,185,129,.5);
 }
 
-/* CARDS */
+/* Cards */
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 gap:25px;
 margin-bottom:35px;
 }
@@ -152,29 +147,28 @@ margin-bottom:35px;
 .card{
 background:var(--glass);
 border:1px solid var(--border);
-backdrop-filter:blur(15px);
+backdrop-filter:blur(12px);
 padding:25px;
 border-radius:20px;
-transition:.4s;
+transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 35px rgba(96,165,250,.4);
+transform:translateY(-8px);
+box-shadow:0 0 30px rgba(96,165,250,.3);
 }
 
 .card h3{
 color:var(--primary);
-margin-bottom:12px;
-font-size:18px;
+margin-bottom:10px;
 }
 
 .number{
-font-size:46px;
+font-size:44px;
 font-weight:700;
 }
 
-/* ANALYTICS */
+/* Analytics */
 
 .analytics{
 display:grid;
@@ -182,38 +176,18 @@ grid-template-columns:2fr 1fr;
 gap:25px;
 }
 
-.chart{
-background:var(--glass);
-border:1px solid var(--border);
-border-radius:20px;
-padding:25px;
-}
-
-.chart canvas{
-max-height:260px;
-}
-
+.chart,
 .activity{
 background:var(--glass);
 border:1px solid var(--border);
-border-radius:20px;
 padding:25px;
-}
-
-.activity h2{
-margin-bottom:20px;
-}
-
-.activity ul{
-padding-left:20px;
+border-radius:20px;
 }
 
 .activity li{
-margin-bottom:15px;
+margin-bottom:12px;
 color:#cbd5e1;
 }
-
-/* TOAST */
 
 .toast{
 position:fixed;
@@ -222,12 +196,8 @@ right:20px;
 background:var(--secondary);
 padding:15px 25px;
 border-radius:12px;
-box-shadow:0 0 25px rgba(37,99,235,.6);
 font-weight:600;
-z-index:999;
 }
-
-/* MOBILE */
 
 @media(max-width:900px){
 
@@ -248,16 +218,12 @@ grid-template-columns:1fr;
 .header{
 flex-direction:column;
 gap:20px;
-text-align:center;
-}
-
-#welcomeUser{
-font-size:26px;
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -269,14 +235,13 @@ font-size:26px;
 </div>
 
 <div class="menu">
-<a href="/dashboard">Dashboard</a>
-<a href="/shipments">Shipments</a>
-<a href="/inventory">Inventory</a>
-<a href="/warehouses">Warehouses</a>
-<a href="/employees">Employees</a>
-<a href="/analytics">Analytics</a>
-<a href="/login">Logout</a>
-  
+<a href="/dashboard">🏠 Dashboard</a>
+<a href="/shipments">🚚 Shipments</a>
+<a href="/inventory">📦 Inventory</a>
+<a href="/warehouses">🏭 Warehouses</a>
+<a href="/employees">👨 Employees</a>
+<a href="/analytics">📊 Analytics</a>
+<a href="#" onclick="logout()">🚪 Logout</a>
 </div>
 
 </div>
@@ -286,7 +251,7 @@ font-size:26px;
 <div class="header">
 
 <h1 id="welcomeUser">
-Mission Control Dashboard
+🚀 SGLS Mission Control
 </h1>
 
 <div class="status">
@@ -326,12 +291,13 @@ Mission Control Dashboard
 </div>
 
 </div>
-  
+
 <div class="analytics">
 
 <div class="chart">
 
-<h2>📈 Shipment Analytics</h2>
+<h2>📈 Logistics Analytics</h2>
+
 <br>
 
 <canvas id="shipmentChart"></canvas>
@@ -344,9 +310,9 @@ Mission Control Dashboard
 
 <ul>
 <li>Shipment #SG1024 delivered successfully</li>
-<li>Warehouse Chennai inventory updated</li>
+<li>Warehouse inventory updated</li>
 <li>New employee registered</li>
-<li>Vehicle Route Optimization completed</li>
+<li>Route optimization completed</li>
 <li>Analytics report generated</li>
 <li>Cloud deployment verified</li>
 <li>Security audit passed</li>
@@ -356,41 +322,57 @@ Mission Control Dashboard
 
 </div>
 
-</div>
+<br>
 
-  
 <div class="activity">
 
 <h2>👤 User Profile</h2>
 
-<p><b>Username:</b> <span id="profileUser"></span></p>
+<p>
+<b>Username:</b>
+<span id="profileUser"></span>
+</p>
 
 <br>
 
-<p><b>Role:</b> <span id="profileRole"></span></p>
+<p>
+<b>Role:</b>
+<span id="profileRole"></span>
+</p>
 
 <br>
 
-<p><b>Status:</b> Active</p>
+<p>
+<b>Status:</b>
+Active
+</p>
 
 </div>
+
 </div>
-  
+
 <div class="toast" id="toast">
 🚀 Welcome to SGLS Command Center
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 
 const username = localStorage.getItem("username");
 const role = localStorage.getItem("role");
 
+document.getElementById("profileUser").innerText =
+username || "Unknown";
+
+document.getElementById("profileRole").innerText =
+role || "EMPLOYEE";
+
 if(username){
 
 document.getElementById("welcomeUser").innerHTML =
-"🚀 Welcome " + username + " | " + role;
+"🚀 Welcome Commander " +
+username +
+" | " +
+role;
 
 }
 
@@ -408,12 +390,12 @@ document.getElementById("toast").style.display="none";
 
 },4000);
 
-new Chart(document.getElementById('shipmentChart'),{
-
+new Chart(
+document.getElementById("shipmentChart"),
+{
 type:'line',
 
 data:{
-
 labels:[
 'Jan',
 'Feb',
@@ -424,9 +406,7 @@ labels:[
 ],
 
 datasets:[{
-
 label:'Shipments',
-
 data:[
 120,
 180,
@@ -435,16 +415,12 @@ data:[
 420,
 550
 ],
-
 borderWidth:3,
-
 fill:false
-
 }]
-
 }
-
-});
+}
+);
 
 </script>
 

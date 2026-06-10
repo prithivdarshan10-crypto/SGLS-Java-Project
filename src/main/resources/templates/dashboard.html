@@ -16,116 +16,164 @@ box-sizing:border-box;
 font-family:'Poppins',sans-serif;
 }
 
+:root{
+--primary:#60a5fa;
+--secondary:#2563eb;
+--dark:#050816;
+--glass:rgba(255,255,255,0.06);
+--border:rgba(255,255,255,0.1);
+}
+
 body{
-background:#050816;
+background:var(--dark);
 color:white;
 overflow-x:hidden;
+min-height:100vh;
 }
+
+/* NASA STARFIELD */
 
 body::before{
 content:'';
 position:fixed;
+top:0;
+left:0;
 width:200%;
 height:200%;
 background:
-radial-gradient(circle,#2563eb22 1px,transparent 1px);
+radial-gradient(circle,#60a5fa33 1px,transparent 1px);
 background-size:50px 50px;
-animation:stars 30s linear infinite;
-z-index:-1;
+animation:stars 35s linear infinite;
+z-index:-2;
+}
+
+body::after{
+content:'';
+position:fixed;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle at center,
+rgba(37,99,235,.18),
+transparent 60%);
+z-index:-3;
 }
 
 @keyframes stars{
-from{transform:translateY(0);}
-to{transform:translateY(-500px);}
+from{
+transform:translateY(0);
 }
+to{
+transform:translateY(-800px);
+}
+}
+
+/* SIDEBAR */
 
 .sidebar{
 position:fixed;
 left:0;
 top:0;
-width:250px;
+width:260px;
 height:100%;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(12px);
+background:var(--glass);
+backdrop-filter:blur(18px);
+border-right:1px solid var(--border);
 padding:25px;
-border-right:1px solid rgba(255,255,255,0.1);
 }
 
 .logo{
-font-size:30px;
+font-size:34px;
 font-weight:700;
-color:#60a5fa;
-margin-bottom:40px;
+color:var(--primary);
 text-align:center;
+margin-bottom:40px;
+text-shadow:0 0 25px rgba(96,165,250,.8);
 }
 
 .menu a{
 display:block;
-color:white;
 text-decoration:none;
+color:white;
 padding:15px;
 margin-bottom:10px;
-border-radius:10px;
-transition:.3s;
+border-radius:12px;
+transition:.35s;
+font-weight:500;
 }
 
 .menu a:hover{
-background:#2563eb;
+background:var(--secondary);
+transform:translateX(8px);
+box-shadow:0 0 20px rgba(37,99,235,.5);
 }
 
+/* MAIN */
+
 .main{
-margin-left:270px;
+margin-left:280px;
 padding:30px;
 }
+
+/* HEADER */
 
 .header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:30px;
+margin-bottom:35px;
 }
 
-.header h1{
-font-size:32px;
+#welcomeUser{
+font-size:34px;
+font-weight:700;
 }
 
 .status{
+padding:12px 22px;
 background:#10b981;
-padding:10px 20px;
 border-radius:30px;
 font-weight:600;
+box-shadow:0 0 20px rgba(16,185,129,.5);
 }
+
+/* CARDS */
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:25px;
-margin-bottom:30px;
+margin-bottom:35px;
 }
 
 .card{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-backdrop-filter:blur(12px);
+background:var(--glass);
+border:1px solid var(--border);
+backdrop-filter:blur(15px);
 padding:25px;
 border-radius:20px;
-transition:.3s;
+transition:.4s;
 }
 
 .card:hover{
-transform:translateY(-5px);
-box-shadow:0 0 25px rgba(96,165,250,.3);
+transform:translateY(-10px);
+box-shadow:0 0 35px rgba(96,165,250,.4);
 }
 
 .card h3{
-color:#60a5fa;
-margin-bottom:10px;
+color:var(--primary);
+margin-bottom:12px;
+font-size:18px;
 }
 
 .number{
-font-size:42px;
+font-size:46px;
 font-weight:700;
 }
+
+/* ANALYTICS */
 
 .analytics{
 display:grid;
@@ -134,20 +182,28 @@ gap:25px;
 }
 
 .chart{
-background:rgba(255,255,255,0.05);
-padding:25px;
+background:var(--glass);
+border:1px solid var(--border);
 border-radius:20px;
-height:300px;
+padding:25px;
+}
+
+.chart canvas{
+max-height:260px;
 }
 
 .activity{
-background:rgba(255,255,255,0.05);
-padding:25px;
+background:var(--glass);
+border:1px solid var(--border);
 border-radius:20px;
+padding:25px;
+}
+
+.activity h2{
+margin-bottom:20px;
 }
 
 .activity ul{
-margin-top:15px;
 padding-left:20px;
 }
 
@@ -155,6 +211,22 @@ padding-left:20px;
 margin-bottom:15px;
 color:#cbd5e1;
 }
+
+/* TOAST */
+
+.toast{
+position:fixed;
+bottom:20px;
+right:20px;
+background:var(--secondary);
+padding:15px 25px;
+border-radius:12px;
+box-shadow:0 0 25px rgba(37,99,235,.6);
+font-weight:600;
+z-index:999;
+}
+
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -172,6 +244,16 @@ margin-left:0;
 grid-template-columns:1fr;
 }
 
+.header{
+flex-direction:column;
+gap:20px;
+text-align:center;
+}
+
+#welcomeUser{
+font-size:26px;
+}
+
 }
 
 </style>
@@ -182,17 +264,17 @@ grid-template-columns:1fr;
 <div class="sidebar">
 
 <div class="logo">
-SGLS
+🚚 SGLS
 </div>
 
 <div class="menu">
-<a href="#">Dashboard</a>
-<a href="#">Shipments</a>
-<a href="#">Inventory</a>
-<a href="#">Warehouses</a>
-<a href="#">Employees</a>
-<a href="#">Analytics</a>
-<a href="/login">Logout</a>
+<a href="#">🏠 Dashboard</a>
+<a href="#">🚚 Shipments</a>
+<a href="#">📦 Inventory</a>
+<a href="#">🏭 Warehouses</a>
+<a href="#">👨 Employees</a>
+<a href="#">📊 Analytics</a>
+<a href="#" onclick="logout()">🚪 Logout</a>
 </div>
 
 </div>
@@ -200,8 +282,15 @@ SGLS
 <div class="main">
 
 <div class="header">
-<h1>Mission Control Dashboard</h1>
-<div class="status">SYSTEM ONLINE</div>
+
+<h1 id="welcomeUser">
+Mission Control Dashboard
+</h1>
+
+<div class="status">
+🟢 SYSTEM ONLINE
+</div>
+
 </div>
 
 <div class="cards">
@@ -231,19 +320,17 @@ SGLS
 <div class="analytics">
 
 <div class="chart">
-<h2>Global Logistics Analytics</h2>
+
+<h2>📈 Shipment Analytics</h2>
 <br>
-<p>📈 Delivery Success Rate : 98.5%</p>
-<br>
-<p>🚚 Active Routes : 145</p>
-<br>
-<p>📦 Orders Processed Today : 2,451</p>
-<br>
-<p>🌍 Countries Served : 42</p>
+
+<canvas id="shipmentChart"></canvas>
+
 </div>
 
 <div class="activity">
-<h2>Recent Activity</h2>
+
+<h2>⚡ Recent Activity</h2>
 
 <ul>
 <li>Shipment #SG1024 delivered successfully</li>
@@ -251,6 +338,8 @@ SGLS
 <li>New employee registered</li>
 <li>Vehicle Route Optimization completed</li>
 <li>Analytics report generated</li>
+<li>Cloud deployment verified</li>
+<li>Security audit passed</li>
 </ul>
 
 </div>
@@ -258,6 +347,78 @@ SGLS
 </div>
 
 </div>
+
+<div class="toast" id="toast">
+🚀 Welcome to SGLS Command Center
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const username = localStorage.getItem("username");
+const role = localStorage.getItem("role");
+
+if(username){
+
+document.getElementById("welcomeUser").innerHTML =
+"🚀 Welcome " + username + " | " + role;
+
+}
+
+function logout(){
+
+localStorage.clear();
+
+window.location.href="/login";
+
+}
+
+setTimeout(()=>{
+
+document.getElementById("toast").style.display="none";
+
+},4000);
+
+new Chart(document.getElementById('shipmentChart'),{
+
+type:'line',
+
+data:{
+
+labels:[
+'Jan',
+'Feb',
+'Mar',
+'Apr',
+'May',
+'Jun'
+],
+
+datasets:[{
+
+label:'Shipments',
+
+data:[
+120,
+180,
+240,
+310,
+420,
+550
+],
+
+borderWidth:3,
+
+fill:false
+
+}]
+
+}
+
+});
+
+</script>
 
 </body>
 </html>

@@ -21,11 +21,6 @@ public class HomeController {
         return "register";
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "dashboard";
-    }
-
     @GetMapping("/shipments")
     public String shipments() {
         return "shipments";

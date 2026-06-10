@@ -36,7 +36,6 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<String>> register(
             @Valid @RequestBody RegisterRequest registerRequest) {
 

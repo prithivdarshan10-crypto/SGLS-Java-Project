@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SGLS Register</title>
+<title>SGLS Register Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
 body{
@@ -18,54 +21,126 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#050816,#0f172a,#1e3a8a);
+background:#050816;
+overflow:hidden;
 color:white;
 }
 
-.card{
-width:420px;
+body::before{
+content:'';
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle,#60a5fa33 1px,transparent 1px);
+background-size:50px 50px;
+animation:stars 35s linear infinite;
+z-index:-2;
+}
+
+@keyframes stars{
+from{transform:translateY(0);}
+to{transform:translateY(-800px);}
+}
+
+.register-card{
+width:450px;
 padding:40px;
-border-radius:20px;
 background:rgba(255,255,255,0.08);
 backdrop-filter:blur(15px);
-box-shadow:0 0 30px rgba(59,130,246,.5);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:25px;
+box-shadow:0 0 40px rgba(37,99,235,.4);
+}
+
+.logo{
+text-align:center;
+font-size:34px;
+font-weight:700;
+color:#60a5fa;
+margin-bottom:15px;
 }
 
 h1{
 text-align:center;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#cbd5e1;
 margin-bottom:25px;
 }
 
 input{
 width:100%;
 padding:15px;
-margin:10px 0;
+margin:12px 0;
 border:none;
-border-radius:10px;
+outline:none;
+border-radius:12px;
+background:rgba(255,255,255,0.1);
+color:white;
+font-size:15px;
+}
+
+input::placeholder{
+color:#cbd5e1;
 }
 
 button{
 width:100%;
 padding:15px;
+margin-top:10px;
+border:none;
+border-radius:12px;
 background:#2563eb;
 color:white;
-border:none;
-border-radius:10px;
-cursor:pointer;
 font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
 }
 
 button:hover{
-background:#1d4ed8;
+transform:translateY(-3px);
+box-shadow:0 0 25px rgba(37,99,235,.6);
 }
+
+.login-link{
+text-align:center;
+margin-top:20px;
+}
+
+.login-link a{
+color:#60a5fa;
+text-decoration:none;
+}
+
+.toast{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#2563eb;
+padding:15px 20px;
+border-radius:10px;
+display:none;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="register-card">
+
+<div class="logo">🚚 SGLS</div>
 
 <h1>Create Account</h1>
+
+<p class="subtitle">
+Join Smart Global Logistics System
+</p>
 
 <form id="registerForm">
 
@@ -73,49 +148,99 @@ background:#1d4ed8;
 
 <input type="text" placeholder="Username" required>
 
-<input type="email" placeholder="Email" required>
+<input type="email" placeholder="Email Address" required>
 
 <input type="password" placeholder="Password" required>
 
 <input type="password" placeholder="Confirm Password" required>
 
-<button type="submit">Register</button>
+<button type="submit">Create Account</button>
 
 </form>
 
+<div class="login-link">
+Already have an account?
+<a href="/login">Login</a>
 </div>
 
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-document.getElementById("registerForm").addEventListener("submit", async function(e){
+
+function showToast(message){
+
+const toast=document.getElementById("toast");
+
+toast.innerHTML=message;
+
+toast.style.display="block";
+
+setTimeout(()=>{
+toast.style.display="none";
+},3000);
+
+}
+
+document.getElementById("registerForm")
+.addEventListener("submit", async function(e){
 
 e.preventDefault();
+
+const password =
+document.querySelectorAll("input")[3].value;
+
+const confirmPassword =
+document.querySelectorAll("input")[4].value;
+
+if(password !== confirmPassword){
+showToast("Passwords do not match");
+return;
+}
 
 const data = {
 fullName: document.querySelectorAll("input")[0].value,
 username: document.querySelectorAll("input")[1].value,
 email: document.querySelectorAll("input")[2].value,
-password: document.querySelectorAll("input")[3].value,
+password: password,
 role: "EMPLOYEE"
 };
+
+try{
 
 const response = await fetch("/api/auth/register",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
-body: JSON.stringify(data)
+body:JSON.stringify(data)
 });
 
 const result = await response.json();
 
 if(response.ok){
-alert("Registration Successful!");
+
+showToast("🚀 Registration Successful");
+
+setTimeout(()=>{
 window.location.href="/login";
+},1500);
+
 }else{
-alert(result.message || "Registration Failed");
+
+showToast(result.message || "Registration Failed");
+
+}
+
+}catch(error){
+
+showToast("Server Error");
+
 }
 
 });
+
 </script>
 
 </body>

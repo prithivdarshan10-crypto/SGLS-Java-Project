@@ -1,17 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+
+<style>
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#0b1026;
+font-family:Arial;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:15px;
+width:350px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#2563eb;
+color:white;
+border:none;
+cursor:pointer;
+}
+</style>
+
 </head>
 <body>
 
-<h1>Register Page</h1>
+<div class="card">
+
+<h2>Register</h2>
 
 <form>
-    <input type="text" placeholder="Username"><br><br>
-    <input type="password" placeholder="Password"><br><br>
-    <button type="submit">Register</button>
+
+<input type="text" placeholder="Username">
+
+<input type="email" placeholder="Email">
+
+<input type="password" placeholder="Password">
+
+<button type="submit">Register</button>
+
 </form>
+
+</div>
 
 </body>
 </html>

@@ -1,48 +1,198 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SGLS Home</title>
+<title>Smart Global Logistics System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{
+*{
 margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(135deg,#0b1026,#1e3a8a);
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#050816;
 color:white;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+top:0;
+left:0;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle,#2563eb22 1px,transparent 1px);
+background-size:50px 50px;
+animation:stars 30s linear infinite;
+z-index:-1;
+}
+
+@keyframes stars{
+from{transform:translateY(0);}
+to{transform:translateY(-500px);}
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 8%;
+}
+
+.logo{
+font-size:32px;
+font-weight:700;
+color:#60a5fa;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+margin-left:25px;
+font-weight:500;
+}
+
+.hero{
+min-height:90vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 text-align:center;
+padding:20px;
 }
 
-.container{
-margin-top:150px;
+.hero h1{
+font-size:4rem;
+max-width:900px;
+background:linear-gradient(to right,#60a5fa,#ffffff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-h1{
-font-size:50px;
+.hero p{
+margin-top:20px;
+font-size:1.2rem;
+max-width:750px;
+color:#cbd5e1;
+}
+
+.buttons{
+margin-top:40px;
 }
 
 .btn{
 display:inline-block;
-padding:15px 30px;
+padding:15px 35px;
 margin:10px;
-background:#3b82f6;
-color:white;
+border-radius:12px;
 text-decoration:none;
-border-radius:10px;
+font-weight:600;
+transition:.3s;
+}
+
+.primary{
+background:#2563eb;
+color:white;
+box-shadow:0 0 25px rgba(37,99,235,.5);
+}
+
+.secondary{
+border:2px solid #60a5fa;
+color:#60a5fa;
+}
+
+.features{
+padding:80px 10%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:20px;
+}
+
+.card h3{
+margin-bottom:15px;
+color:#60a5fa;
+}
+
+footer{
+padding:30px;
+text-align:center;
+color:#94a3b8;
 }
 </style>
-
 </head>
+
 <body>
 
-<div class="container">
-<h1>Smart Global Logistics System</h1>
-<h3>AI Powered Logistics Management Platform</h3>
+<nav>
+<div class="logo">SGLS</div>
 
-<a href="/login" class="btn">Login</a>
-<a href="/register" class="btn">Register</a>
+<div class="nav-links">
+<a href="/">Home</a>
+<a href="/login">Login</a>
+<a href="/register">Register</a>
 </div>
+</nav>
+
+<section class="hero">
+
+<h1>Smart Global Logistics System</h1>
+
+<p>
+Enterprise-grade logistics management platform powered by Spring Boot,
+MySQL, JWT Security and Cloud Deployment.
+</p>
+
+<div class="buttons">
+<a href="/login" class="btn primary">Launch Platform</a>
+<a href="/register" class="btn secondary">Get Started</a>
+</div>
+
+</section>
+
+<section class="features">
+
+<div class="card">
+<h3>Real-Time Tracking</h3>
+<p>Track shipments and logistics operations with live updates.</p>
+</div>
+
+<div class="card">
+<h3>Warehouse Management</h3>
+<p>Manage inventory and warehouse operations efficiently.</p>
+</div>
+
+<div class="card">
+<h3>AI Analytics</h3>
+<p>Gain actionable insights through intelligent analytics.</p>
+</div>
+
+<div class="card">
+<h3>Cloud Infrastructure</h3>
+<p>Accessible securely from anywhere in the world.</p>
+</div>
+
+</section>
+
+<footer>
+© 2026 Smart Global Logistics System
+</footer>
 
 </body>
 </html>

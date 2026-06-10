@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Analytics</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+background:#050816;
+color:white;
+font-family:Arial;
+padding:40px;
+}
+.chart{
+background:#1e3a8a;
+padding:20px;
+border-radius:15px;
+}
+a{
+color:#60a5fa;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📊 Logistics Analytics</h1>
+
+<a href="/dashboard">← Back to Dashboard</a>
+
+<br><br>
+
+<div class="chart">
+
+<canvas id="myChart"></canvas>
+
+</div>
+
+<script>
+
+new Chart(document.getElementById("myChart"),{
+
+type:'bar',
+
+data:{
+labels:['Jan','Feb','Mar','Apr','May','Jun'],
+datasets:[{
+label:'Shipments',
+data:[120,180,240,310,420,550]
+}]
+}
+
+});
+
+</script>
+
+</body>
+</html>

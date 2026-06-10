@@ -1,63 +1,260 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard</title>
+<title>SGLS Command Center</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{
+
+*{
 margin:0;
-font-family:Arial;
-background:#0b1026;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#050816;
 color:white;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle,#2563eb22 1px,transparent 1px);
+background-size:50px 50px;
+animation:stars 30s linear infinite;
+z-index:-1;
+}
+
+@keyframes stars{
+from{transform:translateY(0);}
+to{transform:translateY(-500px);}
+}
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:250px;
+height:100%;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(12px);
+padding:25px;
+border-right:1px solid rgba(255,255,255,0.1);
+}
+
+.logo{
+font-size:30px;
+font-weight:700;
+color:#60a5fa;
+margin-bottom:40px;
+text-align:center;
+}
+
+.menu a{
+display:block;
+color:white;
+text-decoration:none;
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+transition:.3s;
+}
+
+.menu a:hover{
+background:#2563eb;
+}
+
+.main{
+margin-left:270px;
+padding:30px;
 }
 
 .header{
-background:#111827;
-padding:20px;
-text-align:center;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.header h1{
+font-size:32px;
+}
+
+.status{
+background:#10b981;
+padding:10px 20px;
+border-radius:30px;
+font-weight:600;
 }
 
 .cards{
-display:flex;
-justify-content:center;
-gap:20px;
-margin-top:50px;
-flex-wrap:wrap;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-bottom:30px;
 }
 
 .card{
-background:#1e3a8a;
-padding:30px;
-border-radius:15px;
-width:250px;
-text-align:center;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(12px);
+padding:25px;
+border-radius:20px;
+transition:.3s;
 }
-</style>
 
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px rgba(96,165,250,.3);
+}
+
+.card h3{
+color:#60a5fa;
+margin-bottom:10px;
+}
+
+.number{
+font-size:42px;
+font-weight:700;
+}
+
+.analytics{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:25px;
+}
+
+.chart{
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:20px;
+height:300px;
+}
+
+.activity{
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:20px;
+}
+
+.activity ul{
+margin-top:15px;
+padding-left:20px;
+}
+
+.activity li{
+margin-bottom:15px;
+color:#cbd5e1;
+}
+
+@media(max-width:900px){
+
+.sidebar{
+position:relative;
+width:100%;
+height:auto;
+}
+
+.main{
+margin-left:0;
+}
+
+.analytics{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
 </head>
+
 <body>
 
+<div class="sidebar">
+
+<div class="logo">
+SGLS
+</div>
+
+<div class="menu">
+<a href="#">Dashboard</a>
+<a href="#">Shipments</a>
+<a href="#">Inventory</a>
+<a href="#">Warehouses</a>
+<a href="#">Employees</a>
+<a href="#">Analytics</a>
+<a href="/login">Logout</a>
+</div>
+
+</div>
+
+<div class="main">
+
 <div class="header">
-<h1>Smart Global Logistics Dashboard</h1>
+<h1>Mission Control Dashboard</h1>
+<div class="status">SYSTEM ONLINE</div>
 </div>
 
 <div class="cards">
 
 <div class="card">
-<h2>Shipments</h2>
-<h1>120</h1>
+<h3>Total Shipments</h3>
+<div class="number">120</div>
 </div>
 
 <div class="card">
-<h2>Vehicles</h2>
-<h1>50</h1>
+<h3>Vehicles Active</h3>
+<div class="number">50</div>
 </div>
 
 <div class="card">
-<h2>Employees</h2>
-<h1>35</h1>
+<h3>Employees</h3>
+<div class="number">35</div>
+</div>
+
+<div class="card">
+<h3>Warehouses</h3>
+<div class="number">12</div>
+</div>
+
+</div>
+
+<div class="analytics">
+
+<div class="chart">
+<h2>Global Logistics Analytics</h2>
+<br>
+<p>📈 Delivery Success Rate : 98.5%</p>
+<br>
+<p>🚚 Active Routes : 145</p>
+<br>
+<p>📦 Orders Processed Today : 2,451</p>
+<br>
+<p>🌍 Countries Served : 42</p>
+</div>
+
+<div class="activity">
+<h2>Recent Activity</h2>
+
+<ul>
+<li>Shipment #SG1024 delivered successfully</li>
+<li>Warehouse Chennai inventory updated</li>
+<li>New employee registered</li>
+<li>Vehicle Route Optimization completed</li>
+<li>Analytics report generated</li>
+</ul>
+
+</div>
+
 </div>
 
 </div>
